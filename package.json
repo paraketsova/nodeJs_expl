@@ -1,0 +1,19 @@
+{
+  "name": "nodejs_expl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/paraketsova/nodeJs_expl.git"
+  },
+  "author": "MParaketsova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/paraketsova/nodeJs_expl/issues"
+  },
+  "homepage": "https://github.com/paraketsova/nodeJs_expl#readme"
+}
