@@ -1,4 +1,4 @@
-// ПОВТОРИТЬ ПЕРВОЕ ЕГО УПРАЖНЕНИЕ
+
 const http = require('http');
 const url = require('url');
 
