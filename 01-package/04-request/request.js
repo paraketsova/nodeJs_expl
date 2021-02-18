@@ -1,9 +1,9 @@
 const https = require('https')
 
 const options = {
-  hostname: 'randomuser.me', //убираем http, здесь только имя сайта
+  hostname: 'randomuser.me', //убираем http, здесь только имя сайта для линка
 
-  path: '/api', // последняя часть в линке
+  path: '/api', // последняя часть в линке 
   method: 'GET'
 }
 
