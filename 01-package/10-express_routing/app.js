@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 
 app.get('/', (request, response) => {
-    response.sendFile('./landing-page/home.html', { root: __dirname });
+    response.sendFile('./landing-page/home.html', { root: __dirname }); //__dirname - полнуй путь файлсистемы к рабочему файлу
 });
 
 app.get('/about', (request, response) => {
