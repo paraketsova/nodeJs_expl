@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%=title %></title>
+    <meta charset="utf-8" />
+</head>
+<body>
+
+    <h1><%=title %> NACKADEMIN </h1>
+
+    <% if(emailsVisible) {%>
+        <h3>Kontakta oss:</h3>
+        <ul>
+            <% for(var i=0; i<emails.length;i++) {%>
+                <li><%=emails[i] %></li>
+            <%} %>
+        </ul>
+    <% }else {%>
+        <h3>Finns inte email adress</h3>
+    <%} %>
+    <p>Telefonnummret: <%=phone %></p>
+    <%- include("partials/footer.ejs") %>
+</body>
+<html>
