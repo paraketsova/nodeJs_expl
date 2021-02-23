@@ -9,7 +9,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 
 //placeholders for added task
-var task = ["buy socks", "practise with nodejs"];
+var task = ["buy books", "practise with nodejs"];
 //placeholders for removed task
 var complete = ["finish jquery"];
 
