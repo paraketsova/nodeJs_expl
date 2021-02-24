@@ -26,7 +26,7 @@ function getJokes(limit_value, term_value = "", post_response) {
 
         res.on("end", () => {
             const parsedData = JSON.parse(data);
-            let HTMLjokes = `<h1>List for searchterm: ${term_value} and amount: ${limit_value}</h1></br>`;
+            let HTMLjokes = `<h1>List for searchterm: "${term_value}" and amount: ${limit_value}</h1></br>`;
             let counter = 0;
             parsedData.results.forEach(item => {
                 counter ++;
