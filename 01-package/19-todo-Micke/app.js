@@ -61,8 +61,15 @@ app.get('/edit/:id', (request, response) => {
 
   let current_tasks = tasks.filter(task =>  task.id == request.params.id)
   // ряд выше - фильтруем объект, который нас интересует
+
+  let view_task;
+  if (current_tasks.length == 1) { // этот ифсатсер - своеобразный фельхантеринг. Если айди для несуществующего таскА, то нас отправит опять "на главную"
+      view_task = current_tasks[0];
+  } else {
+    response.redirect('/')
+  }
   
-  console.log(current_tasks);
+  console.log(view_task);
 
   response.end();
 
