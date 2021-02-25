@@ -19,6 +19,7 @@
                 <th>Task</th>
                 <th>Status</th>
                 <th></th>
+                <th></th>
             </tr>
             <% for (let task of tasks) { %>
                 <tr>
@@ -30,6 +31,9 @@
                     </td>
                     <td>
                         <%= task.done %>
+                    </td>
+                    <td>
+                        <a href="/edit/<%= task.id%>">Edit</a>
                     </td>
                     <td>
                         <a href="/delete/<%= task.id%>">Remove</a>

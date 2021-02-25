@@ -46,14 +46,26 @@ app.post('/add', (request, response) => {
 app.get('/delete/:id', (request, response) => { //вводим переменную, которая будет указываться в линке при удалении записи - конкретный айди
   let tasks = request.session.tasks || []
 
-  tasks = tasks.filter(task => {
-    return task.id != request.params.id
-  })
+  tasks = tasks.filter(task =>  task.id != request.params.id)
+    // ряд выше - фильтруем объект, который нас интересует
+
   request.session.tasks = tasks;
 
   response.redirect('/');
 
   //console.log(tasks);
+})
+
+app.get('/edit/:id', (request, response) => {
+  let tasks = request.session.tasks || []
+
+  let current_tasks = tasks.filter(task =>  task.id == request.params.id)
+  // ряд выше - фильтруем объект, который нас интересует
+  
+  console.log(current_tasks);
+
+  response.end();
+
 })
 
 app.listen(3000)
