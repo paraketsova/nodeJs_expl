@@ -49,10 +49,11 @@ app.get('/delete/:id', (request, response) => { //вводим переменн�
   tasks = tasks.filter(task => {
     return task.id != request.params.id
   })
+  request.session.tasks = tasks;
 
-  console.log(tasks);
+  response.redirect('/');
 
-  response.end('Remove id: ' + request.params.id)
+  //console.log(tasks);
 })
 
 app.listen(3000)
