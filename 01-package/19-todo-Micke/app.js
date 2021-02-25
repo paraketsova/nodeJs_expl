@@ -15,24 +15,7 @@ app.use(bodyParser.urlencoded())
 
 app.get('/', (request, response) => {
   let tasks = request.session.tasks || []  // egensk som finns i req.session.tasks spara i variabel, om det finns inte spara []
-  /*
-  let tasks = [
-    {
-      id: 1,
-      task: 'Tvätta kläder',
-      status: false
-    },
-     {
-      id: 2,
-      task: 'Handla',
-      status: false
-    },
-    {
-      id: 3,
-      task: 'plugga node.js',
-      status: false
-    }
-  ];*/
+  
   response.render('index.ejs', { tasks: tasks })
 })
 app.post('/add', (request, response) => {
@@ -52,9 +35,24 @@ app.post('/add', (request, response) => {
       done: false
   })
 
-  request.session.tasks = tasks
+  request.session.tasks = tasks;
   //console.log(request.body)
+  // request.session = null; - мы можем написать это
+  //request.session.tasks = []; - или это, но вместо этого пишем  app.get('delete... ): let tasks = request.session.tasks || []
   
   response.redirect('/')
 })
+
+app.get('/delete/:id', (request, response) => { //вводим переменную, которая будет указываться в линке при удалении записи - конкретный айди
+  let tasks = request.session.tasks || []
+
+  tasks = tasks.filter(task => {
+    return task.id != request.params.id
+  })
+
+  console.log(tasks);
+
+  response.end('Remove id: ' + request.params.id)
+})
+
 app.listen(3000)
