@@ -74,4 +74,8 @@ app.get('/edit/:id', (request, response) => {
 
 })
 
+app.post('/edit/:id', (request, response) => {
+  console.log(request.body)
+})
+
 app.listen(3000)
