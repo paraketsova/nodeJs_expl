@@ -68,10 +68,9 @@ app.get('/edit/:id', (request, response) => {
   } else {
     response.redirect('/')
   }
-  
-  console.log(view_task);
+  //console.log(view_task);
 
-  response.end();
+  response.render('edit.ejs', view_task); //т.о. здесь мы рендерим объект (наш таск) с тремия свойствами: айди, телом таска и показателем "дан" (тру или фолс)
 
 })
 
