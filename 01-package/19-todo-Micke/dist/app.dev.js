@@ -12,6 +12,9 @@ var bodyParser = require('body-parser');
 var cookieSession = require('cookie-session'); // paket som innehåler cookies
 
 
+var _require = require('express'),
+    request = _require.request;
+
 app.use('/public', express["static"]('assets')); // add allt som ligger i assets
 
 app.use(cookieSession({
@@ -95,9 +98,43 @@ app.get('/edit/:id', function (request, response) {
   } //console.log(view_task);
 
 
-  response.render('edit.ejs', view_task); //т.о. здесь мы рендерим объект (наш таск) с тремия свойствами: айди, телом таска и показателем "дан" (тру или фолс)
+  response.render('edit.ejs', view_task); //т.о. здесь мы рендерим объект (наш таск) с тремя свойствами: айди, телом таска и показателем "дан" (тру или фолс)
 });
 app.post('/edit/:id', function (request, response) {
-  console.log(request.body);
+  var tasks = request.session.tasks || [];
+  var _iteratorNormalCompletion2 = true;
+  var _didIteratorError2 = false;
+  var _iteratorError2 = undefined;
+
+  try {
+    for (var _iterator2 = tasks[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+      var task = _step2.value;
+
+      //..обновляем значение таска в основном списке после его редактирования==положить новое значение в нужную строку списка
+      if (task.id == request.params.id) {
+        task.task = request.body.todo_item; // здесь обновляем отдельный таск
+      }
+    }
+  } catch (err) {
+    _didIteratorError2 = true;
+    _iteratorError2 = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion2 && _iterator2["return"] != null) {
+        _iterator2["return"]();
+      }
+    } finally {
+      if (_didIteratorError2) {
+        throw _iteratorError2;
+      }
+    }
+  }
+
+  request.session.task = tasks; // здесь обновляем весь список таксков с новым значением таска
+
+  response.redirect('/');
+  /*  console.log(request.params.id); //  номер в тудушке
+   console.log(request.body); // тело-строка таска
+   response.end() */
 });
 app.listen(3000);

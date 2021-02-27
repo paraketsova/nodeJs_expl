@@ -5,7 +5,8 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const cookieSession = require('cookie-session') // paket som innehåler cookies
+const cookieSession = require('cookie-session'); // paket som innehåler cookies
+const { request } = require('express');
 app.use('/public', express.static('assets')); // add allt som ligger i assets
 app.use(cookieSession({ // används för att kriptera
     name: 'session',
@@ -70,12 +71,26 @@ app.get('/edit/:id', (request, response) => {
   }
   //console.log(view_task);
 
-  response.render('edit.ejs', view_task); //т.о. здесь мы рендерим объект (наш таск) с тремия свойствами: айди, телом таска и показателем "дан" (тру или фолс)
+  response.render('edit.ejs', view_task); //т.о. здесь мы рендерим объект (наш таск) с тремя свойствами: айди, телом таска и показателем "дан" (тру или фолс)
 
 })
 
 app.post('/edit/:id', (request, response) => {
-  console.log(request.body)
+  let tasks = request.session.tasks || []
+
+  for (let task of tasks) { //..обновляем значение таска в основном списке после его редактирования==положить новое значение в нужную строку списка
+    
+    if (task.id == request.params.id) {
+        task.task = request.body.todo_item // здесь обновляем отдельный таск
+      }
+  }
+
+  request.session.task = tasks; // здесь обновляем весь список таксков с новым значением таска
+  
+  response.redirect('/');
+ /*  console.log(request.params.id); //  номер в тудушке
+  console.log(request.body); // тело-строка таска
+  response.end() */
 })
 
 app.listen(3000)
