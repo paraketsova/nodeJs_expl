@@ -75,11 +75,13 @@ app.post('/add', function (request, response) {
 app.get('/delete/:id', function (request, response) {
   //вводим переменную, которая будет указываться в линке при удалении записи - конкретный айди
   var tasks = request.session.tasks || [];
-  tasks = tasks.filter(function (task) {
-    return task.id != request.params.id;
-  }); // ряд выше - фильтруем объект, который нас интересует
+  /* tasks = tasks.filter(task =>  task.id != request.params.id)
+    // ряд выше - фильтруем объект, который нас интересует
+   request.session.tasks = tasks; */
 
-  request.session.tasks = tasks;
+  request.session.tasks = tasks.filter(function (task) {
+    return task.id != request.params.id;
+  });
   response.redirect('/'); //console.log(tasks);
 });
 app.get('/edit/:id', function (request, response) {
@@ -114,7 +116,8 @@ app.post('/edit/:id', function (request, response) {
       if (task.id == request.params.id) {
         task.task = request.body.todo_item; // здесь обновляем отдельный таск
       }
-    }
+    } //request.session.task = tasks; // ЭТО НЕ НУЖНО - здесь обновляем весь список таксков с новым значением таска ??
+
   } catch (err) {
     _didIteratorError2 = true;
     _iteratorError2 = err;
@@ -129,8 +132,6 @@ app.post('/edit/:id', function (request, response) {
       }
     }
   }
-
-  request.session.task = tasks; // здесь обновляем весь список таксков с новым значением таска
 
   response.redirect('/');
   /*  console.log(request.params.id); //  номер в тудушке
