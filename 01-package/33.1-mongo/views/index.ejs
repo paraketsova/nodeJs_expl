@@ -11,6 +11,32 @@
     <form action="/addpost" method="post">
         <input name="recipie" type="text" value="recipie" placeholder="Recipie header">
         <br>
+        <p>Ingredient</p>
+        <table id="ingredient">
+            <tr>
+                <th>Name: </th>
+                <th>Amount: </th>
+                <th>Unit: </th>
+            </tr>
+            <tr>
+                <td><input name="name" type="text"></td>
+                <td><input name="amount" type="number"></td>
+                <td><input name="unit" type="text"></td>
+            </tr>
+            <tr>
+                <td><input name="name" type="text"></td>
+                <td><input name="amount" type="number"></td>
+                <td><input name="unit" type="text"></td>
+            </tr>
+            <tr>
+                <td><input name="name" type="text"></td>
+                <td><input name="amount" type="number"></td>
+                <td><input name="unit" type="text"></td>
+            </tr>
+        </table>
+        <button id="button">add another ingredient</button>
+        <br>
+        <br>
         <textarea name="method" placeholder="add info here" rows="5" cols="40"></textarea>
         <br>
         <input type="submit" value="Add recipie">

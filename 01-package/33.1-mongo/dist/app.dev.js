@@ -15,8 +15,7 @@ app.use(express.urlencoded({
   extended: true
 }));
 app.get("/", function (req, res) {
-  var recipies = req.db.get('recipies'); //имя коллекции в ДБ
-
+  var recipies = req.db.get('recipies');
   recipies.find().then(function (data) {
     res.render("index.ejs", {
       recipies: data
@@ -26,7 +25,22 @@ app.get("/", function (req, res) {
 app.post("/addpost", function (req, res) {
   var recipies = req.db.get('recipies'); // console.log(req.body);
 
-  recipies.insert(req.body);
+  var ingredients = [];
+
+  for (var i = 0; i < req.body.name.length; i++) {
+    var ingredient = {
+      name: req.body.name[i],
+      amount: req.body.amount[i],
+      unit: req.body.unit[i]
+    };
+    ingredients.push(ingredient);
+  }
+
+  recipies.insert({
+    recipie: req.body.recipie,
+    method: req.body.method,
+    ingredients: ingredients
+  });
   res.redirect('/');
 });
 app.get("/edit/:id", function (req, res) {
@@ -35,7 +49,7 @@ app.get("/edit/:id", function (req, res) {
     _id: req.params.id
   }).then(function (data) {
     if (1 == data.length) {
-      res.render("edit.ejs", data[0]);
+      res.render("edit.ejs", data[0]); // add stuff!"#!"#!"#!"#!"#!"
     } else {
       res.redirect('/');
     }

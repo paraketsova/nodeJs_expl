@@ -8,7 +8,7 @@ app.use((req, res, next) => {
 })
 app.use(express.urlencoded({ extended: true }));
 app.get("/", (req, res) => {
-    const recipies = req.db.get('recipies'); //имя коллекции в ДБ
+    const recipies = req.db.get('recipies');
     recipies
         .find()
         .then(data => {
@@ -18,7 +18,20 @@ app.get("/", (req, res) => {
 app.post("/addpost", (req, res) => {
     const recipies = req.db.get('recipies');
     // console.log(req.body);
-    recipies.insert(req.body);
+    const ingredients = []
+    for (let i=0; i < req.body.name.length; i++) {
+        let ingredient = {
+            name: req.body.name[i],
+            amount: req.body.amount[i],
+            unit: req.body.unit[i]
+        }
+        ingredients.push(ingredient);
+    }
+    recipies.insert({
+        recipie: req.body.recipie, 
+        method: req.body.method,
+        ingredients: ingredients
+    });
     res.redirect('/');
 })
 app.get("/edit/:id", (req, res) => {
@@ -28,6 +41,7 @@ app.get("/edit/:id", (req, res) => {
         .then(data => {
             if (1 == data.length) {
                 res.render("edit.ejs", data[0]);
+                // add stuff!"#!"#!"#!"#!"#!"
             } else {
                 res.redirect('/');
             }
