@@ -1,19 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
-  <h1>All recepies here!</h1>
-  <form action="post" method="post">
-    <input type="text" value="recepieheader" placeholder="Recipie">
-    <br>
-    <textarea id="textarea" name="textarea" placeholder="add info here" row="3" cols="40"></textarea>
-    <br>
-    <input type="submit" value="Add recepie">
-  </form>
+    <h1>Add recipies here!</h1>
+    <form action="/addpost" method="post">
+        <input name="recipie" type="text" value="recipie" placeholder="Recipie header">
+        <br>
+        <textarea name="method" placeholder="add info here" rows="5" cols="40"></textarea>
+        <br>
+        <input type="submit" value="Add recipie">
+    </form>
+    <p>Recipies: </p>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Recipie name: </th>
+            <th></th>
+            <th></th>
+        </tr>
+        <% let counter = 0 %>
+        <% for (recipie of recipies) { %>
+            <% counter++ %>
+            <tr>
+                <td><%= counter %></td>
+                <% if (recipie.recipie !== undefined) { %>
+                <td><%= recipie.recipie %></td>
+                <% } else { %>
+                <td>...</td>
+                <% } %>
+                <td><a href="/edit/<%= recipie._id %>">Edit</a></td>
+                <td><a href="/delete/<%= recipie._id %>">Delete</a></td>
+            </tr>
+        <% } %>
+    </table>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

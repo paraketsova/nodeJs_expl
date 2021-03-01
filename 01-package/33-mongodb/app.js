@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 
 const monk = require('monk')
-const db = monk('localhost:27017/nodetest1')
+const db = monk('localhost:27017/nodetest1') //имя ДБ
 
 const bodyParser = require('body-parser')
 
@@ -14,7 +14,7 @@ app.use((request, response, next) => {
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (request, response) => {
-    const users = request.db.get('usercollection')
+    const users = request.db.get('usercollection') //имя коллекции в ДБ
     users
         .find()
         .then(data => {

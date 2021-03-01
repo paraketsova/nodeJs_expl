@@ -6,7 +6,7 @@ var app = express();
 
 var monk = require('monk');
 
-var db = monk('localhost:27017/nodetest1');
+var db = monk('localhost:27017/nodetest1'); //имя ДБ
 
 var bodyParser = require('body-parser');
 
@@ -18,7 +18,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.get('/', function (request, response) {
-  var users = request.db.get('usercollection');
+  var users = request.db.get('usercollection'); //имя коллекции в ДБ
+
   users.find().then(function (data) {
     response.render('userlist.ejs', {
       users: data
