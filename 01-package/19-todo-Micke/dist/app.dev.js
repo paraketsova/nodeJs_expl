@@ -22,7 +22,9 @@ app.use(cookieSession({
   name: 'session',
   keys: ['veryimportantsecret', 'notsoimportantsecret']
 }));
-app.use(bodyParser.urlencoded());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.get('/', function (request, response) {
   var tasks = request.session.tasks || []; // egensk som finns i req.session.tasks spara i variabel, om det finns inte spara []
 

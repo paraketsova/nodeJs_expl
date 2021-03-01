@@ -12,7 +12,7 @@ app.use(cookieSession({ // används för att kriptera
     name: 'session',
     keys: ['veryimportantsecret', 'notsoimportantsecret']
 }))
-app.use(bodyParser.urlencoded())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.get('/', (request, response) => {
   let tasks = request.session.tasks || []  // egensk som finns i req.session.tasks spara i variabel, om det finns inte spara []
