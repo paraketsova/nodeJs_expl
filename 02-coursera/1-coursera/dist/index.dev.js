@@ -1,13 +1,10 @@
 "use strict";
 
-var rect = {
-  perimeter: function perimeter(x, y) {
-    return 2 * (x + y);
-  },
-  area: function area(x, y) {
-    return x * y;
-  }
-};
+/* const rect = {
+  perimeter: (x, y) => (2 * (x + y)), 
+  area: (x, y) => (x * y)
+}; */
+var rect = require('./rectangle');
 
 function solveRect(l, b) {
   console.log("Solving for rectangle with l=" + l + "and b = " + b);
