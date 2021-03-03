@@ -29,6 +29,6 @@ var BookSchema = new Schema({
   }]
 });
 BookSchema.virtual('url').get(function () {
-  return "catalog/book/".concat(_this._id); // тут будет  app.get('catalog/book/1234)
+  return "/catalog/book/".concat(_this._id);
 });
 module.exports = mongoose.model('Book', BookSchema);

@@ -8,7 +8,8 @@ var Schema = mongoose.Schema;
 var BookInstanceSchema = new Schema({
   book: {
     type: Schema.Types.ObjectId,
-    ref: 'Book'
+    ref: 'Book',
+    required: true
   },
   imprint: {
     type: String,
@@ -18,7 +19,7 @@ var BookInstanceSchema = new Schema({
     type: String,
     required: true,
     "enum": ['Available', 'Maintenance', 'Loaned', 'Reserved'],
-    "default": 'Mainrenance'
+    "default": 'Maintenance'
   },
   due_back: {
     type: Date,
@@ -26,6 +27,6 @@ var BookInstanceSchema = new Schema({
   }
 });
 BookInstanceSchema.virtual('url').get(function () {
-  return "catalog/bookinstance/".concat(_this._id); // тут будет  app.get('catalog/bookinstance/1234)
+  return "/catalog/bookinstance/".concat(_this._id);
 });
 module.exports = mongoose.model('BookInstance', BookInstanceSchema);

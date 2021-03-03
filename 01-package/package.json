@@ -11,10 +11,12 @@
   "author": "MParaketsova",
   "license": "ISC",
   "dependencies": {
+    "async": "^0.9.2",
     "ejs": "^3.1.6",
     "ex": "^0.1.4",
     "express": "^4.17.1",
     "mogoose": "^0.0.1-security",
+    "mongoose": "^5.11.18",
     "monk": "^7.3.3",
     "path": "^0.12.7",
     "request": "^2.88.2"

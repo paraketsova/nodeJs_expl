@@ -1,20 +1,20 @@
-const { response } = require('express');
-const mogoose = require('mongoose'); //instalera mongoose paket
-const app = expresss();
+const express = require('express')
+const app = express()
 
-const connection = mongoose.connect('mongodb://localhost:27017/local_library');// связь с дб, смотрим в Компасе куда
+const mongoose = require('mongoose')
+const connection = mongoose.connect('mongodb://localhost:27017/local_library')
+const db = mongoose.connection
 
-mongoose db = mogoose.connection
-
-app.get('/', request, response) => {
-  const AuthorModel = require('models/author')
-  response.render('index.ejs')
-}
-
-
+app.get('/', (request, response) => {
+    const AuthorModel = require('./models/author')
+    const BookModel = require('./models/book')
+    const BookInstanceModel = require('./models/bookinstance')
+    const GenreModel = require('./models/genre')
+    response.render('index.ejs')
+})
 
 db.on('error', error => {
-  console.log(error);
+    console.log(error)
 })
 
 app.listen(3000)
