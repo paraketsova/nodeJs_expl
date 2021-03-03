@@ -17,7 +17,16 @@ app.get('/', function (request, response) {
 
   var GenreModel = require('./models/genre');
 
-  response.render('index.ejs');
+  BookModel.findOne({
+    title: 'The Name of the Wind (The Kingkiller Chronicle, #1)'
+  }).populate('author').populate('genre').exec(function (error, book) {
+    if (error) {
+      return handleError(error);
+    }
+
+    console.log(book);
+    response.render('index.ejs', book);
+  });
 });
 db.on('error', function (error) {
   console.log(error);

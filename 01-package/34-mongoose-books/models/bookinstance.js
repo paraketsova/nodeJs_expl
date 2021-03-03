@@ -32,3 +32,4 @@ BookInstanceSchema
     })
 
 module.exports = mongoose.model('BookInstance', BookInstanceSchema)
+
