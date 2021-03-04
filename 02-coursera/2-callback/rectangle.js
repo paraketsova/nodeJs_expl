@@ -3,7 +3,7 @@ module.exports = (x, y, callback) => {
     setTimeout(() => 
       callback(new Error("Rectangle dimentions should be greater than zero: l= " + x + " and b = " + y), 
       null), 
-      2000); //имитируем задержку твета
+      2000); //имитируем задержку ответа
   } else {
     setTimeout(() => 
       callback(null,

@@ -8,9 +8,9 @@ function solveRect(l, b) {
     if (err) {
       console.log("ERROR: ", err.message)
     } else {
-      console.log("The area of the rectangle of demensions l = " + l + "and b = " +
-       b + " is " + rectangle.area() ); //здесь мы тоже не пишем входящие аргументы, т.к. они доступны коллбек функции внутри ф солвеРект   
-       console.log("The peremiter of the rectangle of demensions l = " + l + "and b = " +
+      console.log("The area of the rectangle of demensions l = " + l + " and b = " +
+       b + " is " + rectangle.area() ); //здесь мы тоже не пишем входящие аргументы, т.к. они доступны этой коллбек функции внутри ф солвеРект   
+       console.log("The peremiter of the rectangle of demensions l = " + l + " and b = " +
        b + " is " + rectangle.perimeter() ); 
     }
       console.log("This statement is after the call to rect()")

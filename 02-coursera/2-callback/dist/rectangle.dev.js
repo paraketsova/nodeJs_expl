@@ -4,7 +4,7 @@ module.exports = function (x, y, callback) {
   if (x <= 0 || y <= 0) {
     setTimeout(function () {
       return callback(new Error("Rectangle dimentions should be greater than zero: l= " + x + " and b = " + y), null);
-    }, 2000); //имитируем задержку твета
+    }, 2000); //имитируем задержку ответа
   } else {
     setTimeout(function () {
       return callback(null, {
