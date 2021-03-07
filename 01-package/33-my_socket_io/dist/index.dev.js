@@ -20,6 +20,12 @@ io.on('connection', function (socket) {
     console.log('user disconnected'); //Each socket also fires a special disconnect event
   });
 });
+io.on('connection', function (socket) {
+  //we print out the chat message event
+  socket.on('chat message', function (msg) {
+    console.log('message: ' + msg);
+  });
+});
 http.listen(3000, function () {
   //We make the http server listen on port 3000.
   console.log('listening on *:3000');

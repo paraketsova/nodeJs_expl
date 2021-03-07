@@ -30,9 +30,20 @@
         <input id="input" autocomplete="off" /><button>Send</button>
     </form>
 
-    <script src="/socket.io/socket.io.js"></script> //That’s all it takes to load the socket.io-client, which exposes an io global (and the endpoint GET /socket.io/socket.io.js), and then connect.
+    <script src="/socket.io/socket.io.js"></script> <!--That’s all it takes to load the socket.io-client, which exposes an io global (and the endpoint GET /socket.io/socket.io.js), and then connect.-->
     <script>
         var socket = io(); //I’m not specifying any URL when I call io(), since it defaults to trying to connect to the host that serves the page.
+        
+        var form = document.getElementById('form'); //the server gets it as a chat message event
+        var input = document.getElementById('input');
+
+        form.addEventListener('submit', function(e) { 
+            e.preventDefault();
+            if (input.value) {
+            socket.emit('chat message', input.value);
+            input.value = '';
+            }
+        });
     </script>
     <!-- <script src="/public/scripts/script.js"></script> -->
 </body>

@@ -9,13 +9,17 @@ app.get('/', (req, res) => { //We define a route handler / that gets called when
 
 io.on('connection', (socket) => { //* (add after  add html form and install socket il modul)listen on the connection event for incoming sockets and log it to the console.
   console.log('a user connected'); // now if refresh the webpage you should see the console print “a user connected”.
-   
+
   socket.on('disconnect', () => {
     console.log('user disconnected');//Each socket also fires a special disconnect event
   });
 });
 
-
+io.on('connection', (socket) => { //we print out the chat message event
+  socket.on('chat message', (msg) => {
+    console.log('message: ' + msg);
+  });
+});
 
 http.listen(3000, () => { //We make the http server listen on port 3000.
   console.log('listening on *:3000');
