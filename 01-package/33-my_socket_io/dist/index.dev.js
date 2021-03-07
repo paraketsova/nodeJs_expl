@@ -5,9 +5,20 @@ var app = require('express')(); //Express initializes app to be a function handl
 
 var http = require('http').createServer(app);
 
+var io = require('socket.io')(http); //* initialize a new instance of socket.io by passing the http (the HTTP server) object. 
+
+
 app.get('/', function (req, res) {
   //We define a route handler / that gets called when we hit our website home.
   res.sendFile(__dirname + '/html/index.html'); //refactor our route handler uses sendFile with HTML file
+});
+io.on('connection', function (socket) {
+  //* (add after  add html form and install socket il modul)listen on the connection event for incoming sockets and log it to the console.
+  console.log('a user connected'); // now if refresh the webpage you should see the console print “a user connected”.
+
+  socket.on('disconnect', function () {
+    console.log('user disconnected'); //Each socket also fires a special disconnect event
+  });
 });
 http.listen(3000, function () {
   //We make the http server listen on port 3000.
