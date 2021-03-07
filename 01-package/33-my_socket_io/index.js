@@ -2,7 +2,7 @@ const app = require('express')(); //Express initializes app to be a function han
 const http = require('http').createServer(app);
 
 app.get('/', (req, res) => { //We define a route handler / that gets called when we hit our website home.
-  res.send('<h1>Hej ponka!</h1>');
+  res.sendFile(__dirname + '/html/index.html');//refactor our route handler uses sendFile with HTML file
 });
 
 http.listen(3000, () => { //We make the http server listen on port 3000.
