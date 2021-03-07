@@ -23,9 +23,16 @@ io.on('connection', function (socket) {
 io.on('connection', function (socket) {
   //we print out the chat message event
   socket.on('chat message', function (msg) {
-    console.log('message: ' + msg);
+    console.log('message: ' + msg); //io.emit('some event', { someProperty: 'some value', otherProperty: 'other value' }); // This will emit the event to all connected sockets
+
+    io.emit('chat message', msg); //for the sake of simplicity we’ll send the message to everyone, including the sender.
   });
 });
+/* 
+io.on('connection', (socket) => {//If you want to send a message to everyone except for a certain emitting socket, we have the broadcast flag for emitting from that socket
+  socket.broadcast.emit('hi');
+}); */
+
 http.listen(3000, function () {
   //We make the http server listen on port 3000.
   console.log('listening on *:3000');
