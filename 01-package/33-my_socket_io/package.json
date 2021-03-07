@@ -1,0 +1,15 @@
+{
+  "name": "33-my_socket_io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mariia Paraketsova",
+  "license": "ISC",
+  "dependencies": {
+    "experss": "^0.0.1-security",
+    "http": "^0.0.1-security"
+  }
+}
