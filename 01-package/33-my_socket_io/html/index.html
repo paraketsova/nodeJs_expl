@@ -32,10 +32,10 @@
 
     <script src="/socket.io/socket.io.js"></script> <!--That’s all it takes to load the socket.io-client, which exposes an io global (and the endpoint GET /socket.io/socket.io.js), and then connect.-->
     <script>
-        var socket = io(); //I’m not specifying any URL when I call io(), since it defaults to trying to connect to the host that serves the page.
-        var messages = document.getElementById('messages');
-        var form = document.getElementById('form'); //the server gets it as a chat message event
-        var input = document.getElementById('input');
+        let socket = io(); //I’m not specifying any URL when I call io(), since it defaults to trying to connect to the host that serves the page.
+        let messages = document.getElementById('messages');
+        let form = document.getElementById('form'); //the server gets it as a chat message event
+        let input = document.getElementById('input');
 
         form.addEventListener('submit', function(e) { 
             e.preventDefault();
@@ -45,7 +45,7 @@
             }
         });
         socket.on('chat message', function(msg) { //on the client side when we capture a chat message event we’ll include it in the page
-            var item = document.createElement('li');
+            let item = document.createElement('li');
             item.textContent = msg;
             messages.appendChild(item);
             window.scrollTo(0, document.body.scrollHeight);
