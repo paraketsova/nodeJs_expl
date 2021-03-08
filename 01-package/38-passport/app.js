@@ -19,16 +19,18 @@ passport.use(new LocalStrategy( // модульный вариант app.use г�
       }
 
       if (!user) {
-        return done(null, false, { message: 'Incorrect username.' });
+        return done(null, false, { message: 'Incorrect username.' })
+    }
+
+      if (!user.validPassword(password)) {
+          return done(null, false, { message: 'Incorrect password.' })
       }
 
-      if(!user.validPassport(password)) {
-        return done(null, false, { message: "Incorrect password. " })
-      } 
-
-/*       if(!user.validPassport(password)) {
-        return done(null, false, { message: "Incorrect password or user. " })
-      }  */
+      /*
+      if (!user || !user.validPassword(password)) {
+          return done(null, false, { message: 'Incorrect username or password.' })
+      }
+      */
     })
   }
 ))
