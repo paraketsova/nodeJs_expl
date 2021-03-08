@@ -22,7 +22,8 @@ app.get('/', function (request, response) {
 app.post('/upload-profile-pic', function (request, response) {
   try {
     if (request.files) {
-      var profile_pic = request.files.profile_pic;
+      var profile_pic = request.files.profile_pic; //console.log(profile_pic)
+
       var file_name = "./uploads/".concat(profile_pic.name);
       profile_pic.mv(file_name);
       response.render('image', {

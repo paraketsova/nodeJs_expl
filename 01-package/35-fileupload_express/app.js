@@ -22,6 +22,8 @@ app.post('/upload-profile-pic', (request, response) => {
         if (request.files) {
             let profile_pic = request.files.profile_pic
 
+            //console.log(profile_pic)
+
             let file_name = `./uploads/${profile_pic.name}`
 
             profile_pic.mv(file_name)
