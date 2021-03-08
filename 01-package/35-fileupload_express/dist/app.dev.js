@@ -1,62 +1,38 @@
 "use strict";
 
-var https = require('https');
-
 var express = require('express');
+
+var app = express();
+
+var fileUpload = require('express-fileupload');
 
 var path = require('path');
 
-var bodyParser = require('body-parser');
-
-var app = express();
-app.use(bodyParser.urlencoded());
+app.use(fileUpload({
+  createParentPath: true
+}));
+app.use(express.urlencoded({
+  extended: true
+}));
+app.use('/uploads', express["static"](path.join(__dirname, 'uploads')));
+app.set('view engine', 'ejs');
 app.get('/', function (request, response) {
-  response.sendFile(path.join(__dirname + '/html/index.html'));
+  response.render('index');
 });
-app.post('/search-jokes', function (request, response) {
-  response.type('text/html');
-  var options = {
-    hostname: 'icanhazdadjoke.com',
-    path: '/search?term=' + request.body.search_term,
-    headers: {
-      'Accept': 'application/json'
+app.post('/upload-profile-pic', function (request, response) {
+  try {
+    if (request.files) {
+      var profile_pic = request.files.profile_pic;
+      var file_name = "./uploads/".concat(profile_pic.name);
+      profile_pic.mv(file_name);
+      response.render('image', {
+        image: file_name
+      });
+    } else {
+      response.end('<h1>No file uploaded!</h1>');
     }
-  };
-  var api_request = https.request(options, function (api_response) {
-    var data = '';
-    api_response.on('data', function (chunk) {
-      data += String(chunk);
-    });
-    api_response.on('end', function () {
-      var json = JSON.parse(data);
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = json.results[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          joke_object = _step.value;
-          response.write("<div>".concat(joke_object.joke, "</div>"));
-          response.write('<hr>');
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator["return"] != null) {
-            _iterator["return"]();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
-
-      response.end();
-    });
-  });
-  api_request.end();
+  } catch (error) {
+    response.send(error);
+  }
 });
 app.listen(3000);

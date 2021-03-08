@@ -1,46 +1,38 @@
-const https = require('https')
 const express = require('express')
+const app = express()
+
+const fileUpload = require('express-fileupload')
 const path = require('path')
-const bodyParser = require('body-parser');
 
-const app = express();
 
-app.use(bodyParser.urlencoded());
+app.use(fileUpload({
+    createParentPath: true
+}))
+app.use(express.urlencoded({ extended: true }))
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
+
+app.set('view engine', 'ejs')
 
 app.get('/', (request, response) => {
-    response.sendFile(path.join(__dirname + '/html/index.html'))
+    response.render('index')
 })
 
-app.post('/search-jokes', (request, response) => {
-    response.type('text/html')
+app.post('/upload-profile-pic', (request, response) => {
+    try {
+        if (request.files) {
+            let profile_pic = request.files.profile_pic
 
-    const options = {
-        hostname: 'icanhazdadjoke.com',
-        path: '/search?term=' + request.body.search_term,
-        headers: {
-            'Accept': 'application/json'
+            let file_name = `./uploads/${profile_pic.name}`
+
+            profile_pic.mv(file_name)
+
+            response.render('image', { image: file_name })
+        } else {
+            response.end('<h1>No file uploaded!</h1>')
         }
+    } catch (error) {
+        response.send(error)
     }
-
-    const api_request = https.request(options, api_response => {
-        let data = '';
-
-        api_response.on('data', chunk => {
-            data += String(chunk)
-        })
-
-        api_response.on('end', () => {
-            let json = JSON.parse(data)
-
-            for (joke_object of json.results) {
-                response.write(`<div>${joke_object.joke}</div>`)
-                response.write('<hr>')
-            }
-            response.end();
-        })
-    })
-    api_request.end();
-
 })
 
 app.listen(3000)
