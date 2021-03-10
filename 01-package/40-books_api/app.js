@@ -19,7 +19,6 @@ app.get('/new-book', (request, response) => {
 app.post('/books', (request, response) => {
     const book = request.body
 
-    console.log(book)
     books.push(book)
 
     response.end()
@@ -29,10 +28,38 @@ app.get('/books', (request, response) => {
     response.send(books)
 })
 
+app.get('/books/:isbn', (request, response) => {
+    const isbn = request.params.isbn
+
+    let book = books.filter(book => book.isbn == isbn)
+
+    if (book.length > 0) {
+        response.send(book[0])
+    } else {
+        response.status(404).send('Book not found')
+    }
+})
+
 app.delete('/books/:isbn', (request, response) => {
     const isbn = request.params.isbn
 
     books = books.filter(book => book.isbn != isbn)
+
+    response.end()
+})
+
+app.put('/books/:isbn', (request, response) => {
+    const isbn = request.params.isbn
+    const book_data = request.body
+
+
+    books = books.map(book => {
+        if (book.isbn == isbn) {
+            return book_data
+        } else {
+            return book
+        }
+    })
 
     response.end()
 })
