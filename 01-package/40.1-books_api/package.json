@@ -1,0 +1,17 @@
+{
+  "name": "40.1-books_api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "monk": "^7.3.3",
+    "morgan": "^1.10.0",
+    "path": "^0.12.7"
+  },
+  "description": ""
+}

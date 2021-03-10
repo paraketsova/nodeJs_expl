@@ -9,19 +9,19 @@ app.use('/public', express.static(path.join(__dirname, 'public')))
 let books = getBooks()
 
 app.get('/', (request, response) => {
-    response.sendFile(__dirname + '/public/book-list.html')
+  response.sendFile(__dirname + '/public/book-list.html')
 })
 
 app.get('/new-book', (request, response) => {
-    response.sendFile(__dirname + '/public/new-book.html')
+  response.sendFile(__dirname + '/public/new-book.html')
 })
 
 app.post('/books', (request, response) => {
-    const book = request.body
+  const book = request.body
 
-    books.push(book)
+  books.push(book)
 
-    response.end()
+  response.end()
 })
 
 app.get('/books', (request, response) => {
