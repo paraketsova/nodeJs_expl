@@ -22,7 +22,7 @@ mongoose.connect('mongodb://localhost:27017/login')
 app.set('view engine', 'ejs')
 app.use(expressEjsLayout)
 
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({ extended: true }))//If extended is false, the URL-encoded data will be parsed with the qs library which allows you to create a nested object from your query string.
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
 

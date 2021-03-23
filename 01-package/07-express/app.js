@@ -12,6 +12,12 @@ app.get('/users', function(request, response) {
   response.send("Here's a list of our users.");
 });
 
+// выведет в теле браузера строку Лараре хетер ИМЯ ИЗ КУЕРИ РЕКВЕСТА после инструктор/ИМЯ:
+app.get('/instructor/:name', (request, response) => {
+  response.send(`Läraren heter ${request.params.name}`);
+});
+//====//
+
 var server = app.listen(port, () => {
   const port = 3002;
   console.log(`Server running at http://${hostname}:${port}/`)

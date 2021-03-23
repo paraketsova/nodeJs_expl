@@ -1,7 +1,3 @@
-/*jslint devel: true */
-/*jslint es6 */
-/*jslint node: true */
-/*global console */
 'use strict';
 
 const express = require('express');

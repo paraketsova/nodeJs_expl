@@ -4,7 +4,7 @@ const messageSchema = mongoose.Schema({
   user: {
     type: String,
     required: true,
-    c
+    maxlength: 100
   },
   channel: {
     type: String,
